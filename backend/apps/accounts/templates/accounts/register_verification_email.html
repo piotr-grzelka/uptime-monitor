@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% trans 'Hello' %} {{ user.first_name }}
+
+Click below link to confirm you account:
+
+{{ protocol }}://{{ domain }}/register/confirm/{{ token }}
+
+Regards, The Team

@@ -1,0 +1,12 @@
+[MISCELLANEOUS]
+notes=FIXME
+[MASTER]
+load-plugins=pylint_django
+django-settings-module=config.settings
+ignore=migrations,venv,tests
+disable=
+    C0301, # Line too long
+    C0114, # missing-module-docstring
+    R0901, # too-many-ancestors
+[FORMAT]
+good-names=i,j,k,ex,_,pk,x,y

@@ -1,0 +1,5 @@
+[run]
+omit =
+    *commands/samples.py
+    *commands/sendtestemail2.py
+    *migrations*
