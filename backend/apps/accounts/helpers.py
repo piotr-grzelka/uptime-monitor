@@ -16,6 +16,4 @@ def generate_token_for_user(user: CustomUser, hours=1) -> str:
     """
     valid_to = now() + timedelta(hours=hours)
     signer = Signer()
-    return signer.sign_object(
-        {"id": user.pk, "valid_to": valid_to.isoformat()}
-    )
+    return signer.sign_object({"id": user.pk, "valid_to": valid_to.isoformat()})

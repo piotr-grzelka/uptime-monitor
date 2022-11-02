@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
     "apps.accounts.apps.AccountsConfig",
+    "apps.organizations.apps.OrganizationsConfig",
 ]
 
 MIDDLEWARE = [
@@ -46,8 +47,10 @@ INTERNAL_IPS = [
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_THROTTLE_CLASSES": [
@@ -165,4 +168,3 @@ EMAIL_PORT = config("EMAIL_PORT", default=1025)
 EMAIL_USE_SSL = config("EMAIL_USE_SSL", default=False, cast=bool)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
-

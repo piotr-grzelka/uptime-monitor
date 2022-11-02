@@ -13,4 +13,4 @@ def new_default_json_encoder(self, obj):
     return old_default_json_encoder(self, obj)
 
 
-JSONEncoder.default = new_default_json_encoder
+JSONEncoder.default = new_default_json_encoder  # type: ignore

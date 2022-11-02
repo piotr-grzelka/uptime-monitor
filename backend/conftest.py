@@ -1,15 +1,21 @@
 import psycopg2
 import pytest
-from django.db import connections
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-
 from apps.accounts.models import CustomUser
 from apps.accounts.tests.factories import UserFactory
+from apps.organizations.models import Organization
+from apps.organizations.tests.factories import OrganizationFactory
+from django.db import connections
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 @pytest.fixture
 def user(db) -> CustomUser:
     return UserFactory.create()
+
+
+@pytest.fixture
+def organization(db) -> Organization:
+    return OrganizationFactory.create(owner=UserFactory.create())
 
 
 def run_sql(sql):

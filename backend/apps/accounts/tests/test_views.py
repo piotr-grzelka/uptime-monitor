@@ -67,7 +67,7 @@ class TestAccountRegister:
             email="valid@example.com"
         ).get()
         assert user_from_db is not None
-        assert user_from_db.password != "validPassword123"
+        assert user_from_db.password != "validPassword123"  # nosec
 
         assert len(mail.outbox) == 1
         assert mail.outbox[0].subject == "Activate your user account."
@@ -86,33 +86,33 @@ class TestAccountRegisterConfirmation:
         assert response.status_code == 400
 
     def test_invalid_token(self, client):
-        response = client.post("/api/v1/accounts/register-confirm/", data={
-            "token": "invalid token"
-        })
+        response = client.post(
+            "/api/v1/accounts/register-confirm/", data={"token": "invalid token"}
+        )
         assert response.data.keys().__len__() == 1
         assert response.status_code == 400
         assert "token" in response.data
-        assert response.data['token'] == 'Provided token is malformed.'
+        assert response.data["token"] == "Provided token is malformed."
 
     def test_token_expired(self, client, user: CustomUser):
         token = generate_token_for_user(user, 0)
 
-        response = client.post("/api/v1/accounts/register-confirm/", data={
-            "token": token
-        })
+        response = client.post(
+            "/api/v1/accounts/register-confirm/", data={"token": token}
+        )
 
         assert response.data.keys().__len__() == 1
         assert response.status_code == 400
         assert "token" in response.data
-        assert response.data['token'] == 'Provided token is expired.'
+        assert response.data["token"] == "Provided token is expired."
 
     def test_user_not_found(self, client, user: CustomUser):
         token = generate_token_for_user(user, 1)
         user.delete()
 
-        response = client.post("/api/v1/accounts/register-confirm/", data={
-            "token": token
-        })
+        response = client.post(
+            "/api/v1/accounts/register-confirm/", data={"token": token}
+        )
 
         assert response.data.keys().__len__() == 1
         assert response.status_code == 404
@@ -123,21 +123,21 @@ class TestAccountRegisterConfirmation:
 
         token = generate_token_for_user(user, 1)
 
-        response = client.post("/api/v1/accounts/register-confirm/", data={
-            "token": token
-        })
+        response = client.post(
+            "/api/v1/accounts/register-confirm/", data={"token": token}
+        )
 
         assert response.data.keys().__len__() == 1
         assert response.status_code == 400
         assert "token" in response.data
-        assert response.data['token'] == 'User already confirmed.'
+        assert response.data["token"] == "User already confirmed."
 
     def test_valid_confirmation(self, client, user: CustomUser):
         token = generate_token_for_user(user, 1)
 
-        response = client.post("/api/v1/accounts/register-confirm/", data={
-            "token": token
-        })
+        response = client.post(
+            "/api/v1/accounts/register-confirm/", data={"token": token}
+        )
 
         assert response.data.keys().__len__() == 1
         assert response.status_code == 204
