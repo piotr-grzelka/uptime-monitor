@@ -18,8 +18,15 @@ def organization(db) -> Organization:
     return OrganizationFactory.create(owner=UserFactory.create())
 
 
-def run_sql(sql):
-    conn = psycopg2.connect(database="postgres")
+def run_sql(sql, dbname='postgres'):
+    from django.conf import settings
+    conn = psycopg2.connect(
+        dbname=dbname,
+        user=settings.DATABASES["default"]["USER"],
+        password=settings.DATABASES["default"]["PASSWORD"],
+        host=settings.DATABASES["default"]["HOST"],
+        port=settings.DATABASES["default"]["PORT"],
+    )
     conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cur = conn.cursor()
     cur.execute(sql)
