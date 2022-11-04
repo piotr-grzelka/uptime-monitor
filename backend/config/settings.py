@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "apps.accounts.apps.AccountsConfig",
     "apps.organizations.apps.OrganizationsConfig",
+    "apps.services.apps.ServicesConfig",
 ]
 
 MIDDLEWARE = [
@@ -162,9 +163,15 @@ CORS_ALLOWED_ORIGINS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = config("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 EMAIL_HOST = config("EMAIL_HOST", default="mailhog")
 EMAIL_PORT = config("EMAIL_PORT", default=1025)
 EMAIL_USE_SSL = config("EMAIL_USE_SSL", default=False, cast=bool)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
+
+NOTIFY_CHANNELS = [
+    "apps.notify.channels.email.EmailChannel",
+    "apps.notify.channels.pushover.PushoverChannel",
+    "apps.notify.channels.sms.SmsApiPlChannel",
+]
