@@ -76,6 +76,8 @@ class UserRegisterConfirmSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         print(validated_data)
-        return None
+
+    def update(self, *args, **kwargs):
+        pass
 
     token = serializers.CharField(label=_("Token"), required=True)

@@ -5,6 +5,10 @@ from .base import BaseChannel
 
 
 class EmailChannel(BaseChannel):
+    """
+    Sends notifications via email
+    """
+
     title = _("Email")
 
     def form_fields(self):

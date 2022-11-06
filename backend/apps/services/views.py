@@ -1,8 +1,7 @@
-from django.db.models.query_utils import Q
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Service, ServiceNotify
+from .models import Service
 from .serializers import ServiceSerializer
 
 

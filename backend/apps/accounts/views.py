@@ -38,18 +38,25 @@ class RegisterConfirmView(GenericAPIView):
     serializer_class = UserRegisterConfirmSerializer
 
     def post(self, request, *args, **kwargs):
+        """
+        Confirm an account by hash from email message
+
+        @param request:
+        @param args:
+        @param kwargs:
+        @return:
+        """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         token = serializer.validated_data.get("token")
-        print(">>", token)
 
         try:
             unsigned = Signer().unsign_object(token)
             user_id = unsigned["id"]
             valid_to = parse(unsigned["valid_to"])
-        except BadSignature:
-            raise ValidationError({"token": _("Provided token is malformed.")})
+        except BadSignature as exc:
+            raise ValidationError({"token": _("Provided token is malformed.")}) from exc
 
         if valid_to < now():
             raise ValidationError({"token": _("Provided token is expired.")})

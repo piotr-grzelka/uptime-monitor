@@ -4,6 +4,10 @@ from .base import BaseChannel
 
 
 class SmsApiPlChannel(BaseChannel):
+    """
+    Sends SMS notifications via smsapi.pl
+    """
+
     title = _("SMS")
 
     def form_fields(self):
@@ -13,6 +17,10 @@ class SmsApiPlChannel(BaseChannel):
 
 
 class TwilioChannel(BaseChannel):
+    """
+    Sends SMS notifications via Twilio
+    """
+
     title = _("SMS")
 
     def form_fields(self):

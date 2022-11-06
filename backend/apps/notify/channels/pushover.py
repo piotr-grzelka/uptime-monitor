@@ -4,6 +4,10 @@ from .base import BaseChannel
 
 
 class PushoverChannel(BaseChannel):
+    """
+    Sends notifications via pushover
+    """
+
     title = _("Pushover")
 
     def form_fields(self):

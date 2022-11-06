@@ -20,5 +20,5 @@ class OrganizationsViewSet(ModelViewSet):
         Filter objects by ownership and other users privileges for current logged in user
         """
         user_id = self.request.user.id
-        q = Q(owner_id=user_id) | Q(users__user_id=user_id, users__is_accepted=True)
-        return Organization.objects.filter(q)
+        query = Q(owner_id=user_id) | Q(users__user_id=user_id, users__is_accepted=True)
+        return Organization.objects.filter(query)

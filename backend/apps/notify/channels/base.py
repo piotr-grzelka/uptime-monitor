@@ -1,8 +1,20 @@
 from abc import ABC
 
-from django.core.validators import EmailValidator
-
 
 class BaseChannel(ABC):
+    """
+    Base class for all notification channels
+    """
+
     def kind(self):
+        """
+        Should return unique channel identifier
+        """
         return self.__class__.__name__
+
+    def form_fields(self):
+        """
+        Should return form field for channel
+        @return:
+        """
+        raise NotImplementedError("Form fields not implemented")

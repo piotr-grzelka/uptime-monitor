@@ -1,20 +1,25 @@
 import functools
 
-from apps.notify.channels.base import BaseChannel
-from config import settings
+from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.module_loading import import_string
 
+from .channels.base import BaseChannel
 
-# @functools.lru_cache
+
+@functools.lru_cache
 def get_notify_channels():
+    """
+    returns all available notify channels
+    @return:
+    """
     channels = []
     for ch_path in settings.NOTIFY_CHANNELS:
         ch_cls = import_string(ch_path)
         channel = ch_cls()
         if not isinstance(channel, BaseChannel):
             raise ImproperlyConfigured(
-                "channel doesn't inherit from BaseChannel: %s" % ch_path
+                f"channel doesn't inherit from BaseChannel: {ch_path}"
             )
         channels.append(channel)
     return channels

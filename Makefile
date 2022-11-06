@@ -37,5 +37,5 @@ clean:
 	rm -rf backend/.pytest_cache
 	rm -rf backend/htmlcov
 
-# full: fix flake8 mypy pylint safety bandit coverage
-full: fix flake8 mypy safety bandit coverage
+full: fix flake8 mypy pylint safety bandit coverage
+#full: fix flake8 mypy safety bandit coverage
