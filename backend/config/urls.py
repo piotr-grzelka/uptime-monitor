@@ -17,7 +17,7 @@ urlpatterns = [
         include_docs_urls(
             title="Rest API",
             permission_classes=[
-                "rest_framework.permissions.AllowAny",
+                AllowAny,  # type: ignore
             ],
         ),
     ),
@@ -32,6 +32,8 @@ urlpatterns = [
     ),
     path("api/v1/accounts/", include("apps.accounts.urls")),
     path("api/v1/organizations/", include("apps.organizations.urls")),
+    path("api/v1/services/", include("apps.services.urls")),
+    path("api/v1/notify/", include("apps.notify.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

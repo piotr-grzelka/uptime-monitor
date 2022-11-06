@@ -18,8 +18,9 @@ def organization(db) -> Organization:
     return OrganizationFactory.create(owner=UserFactory.create())
 
 
-def run_sql(sql, dbname='postgres'):
+def run_sql(sql, dbname="postgres"):
     from django.conf import settings
+
     conn = psycopg2.connect(
         dbname=dbname,
         user=settings.DATABASES["default"]["USER"],

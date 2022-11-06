@@ -4,8 +4,18 @@ from .base import BaseChannel
 
 
 class SmsApiPlChannel(BaseChannel):
-    label = _("SMS")
+    title = _("SMS")
+
+    def form_fields(self):
+        return [
+            {"kind": "char", "name": "phone", "label": "Phone number", "validators": []}
+        ]
 
 
 class TwilioChannel(BaseChannel):
-    label = _("SMS")
+    title = _("SMS")
+
+    def form_fields(self):
+        return [
+            {"kind": "char", "name": "phone", "label": "Phone number", "validators": []}
+        ]

@@ -4,4 +4,10 @@ from .base import BaseChannel
 
 
 class PushoverChannel(BaseChannel):
-    label = _("Pushover")
+    title = _("Pushover")
+
+    def form_fields(self):
+        return [
+            {"kind": "char", "name": "token", "label": "Token", "validators": []},
+            {"kind": "char", "name": "user", "label": "User", "validators": []},
+        ]

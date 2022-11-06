@@ -163,7 +163,9 @@ CORS_ALLOWED_ORIGINS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EMAIL_BACKEND = config("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
+EMAIL_BACKEND = config(
+    "EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend"
+)
 EMAIL_HOST = config("EMAIL_HOST", default="mailhog")
 EMAIL_PORT = config("EMAIL_PORT", default=1025)
 EMAIL_USE_SSL = config("EMAIL_USE_SSL", default=False, cast=bool)
