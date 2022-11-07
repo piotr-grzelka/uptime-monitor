@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
+    "apps.contrib.apps.ContribConfig",
     "apps.accounts.apps.AccountsConfig",
     "apps.organizations.apps.OrganizationsConfig",
     "apps.services.apps.ServicesConfig",

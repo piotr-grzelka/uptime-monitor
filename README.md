@@ -17,6 +17,8 @@ Website monitoring software.
 - Redux
 - Material
 
+Template based on [https://github.com/minimal-ui-kit/material-kit-react](https://github.com/minimal-ui-kit/material-kit-react)
+
 ## Demo
 
 todo
