@@ -16,7 +16,7 @@ class EmailChannel(BaseChannel):
             {
                 "kind": "email",
                 "name": "email",
-                "label": "Email",
+                "title": "Email",
                 "validators": [EmailValidator],
             }
         ]

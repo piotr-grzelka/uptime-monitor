@@ -3,6 +3,8 @@ import uuid
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from ..organizations.models import Organization
+
 
 class Service(models.Model):
     """
@@ -56,6 +58,9 @@ class Service(models.Model):
     last_checked = models.DateTimeField(_("Last checked"), null=True, blank=True)
 
     availability = models.PositiveIntegerField(_("Percentage availability"), default=0)
+    organization = models.ForeignKey(
+        Organization, models.CASCADE, verbose_name=_("Organization")
+    )
 
     def __str__(self):
         return self.name

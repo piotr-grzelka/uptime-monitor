@@ -9,7 +9,7 @@ class FormFieldSerializer(serializers.Serializer):
 
     kind = serializers.CharField(label=_("Kind"))
     name = serializers.CharField(label=_("Name"))
-    title = serializers.CharField(label=_("Label"))
+    title = serializers.CharField(label=_("Title"))
 
     def update(self, *args, **kwargs):
         """temporary unavailable"""
@@ -18,7 +18,7 @@ class FormFieldSerializer(serializers.Serializer):
         """temporary unavailable"""
 
     class Meta:
-        fields = ("kind", "name", "label")
+        fields = ("kind", "name", "title")
 
 
 class NotifyChannelSerializer(serializers.Serializer):
@@ -39,6 +39,6 @@ class NotifyChannelSerializer(serializers.Serializer):
     class Meta:
         fields = (
             "kind",
-            "label",
+            "title",
             "form_fields",
         )

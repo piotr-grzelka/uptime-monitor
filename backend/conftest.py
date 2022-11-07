@@ -4,6 +4,8 @@ from apps.accounts.models import CustomUser
 from apps.accounts.tests.factories import UserFactory
 from apps.organizations.models import Organization
 from apps.organizations.tests.factories import OrganizationFactory
+from apps.services.models import Service
+from apps.services.tests.factories import ServiceFactory
 from django.db import connections
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
@@ -16,6 +18,13 @@ def user(db) -> CustomUser:
 @pytest.fixture
 def organization(db) -> Organization:
     return OrganizationFactory.create(owner=UserFactory.create())
+
+
+@pytest.fixture
+def service(db) -> Service:
+    return ServiceFactory.create(
+        organization=OrganizationFactory.create(owner=UserFactory.create())
+    )
 
 
 def run_sql(sql, dbname="postgres"):

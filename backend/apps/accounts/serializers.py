@@ -75,9 +75,10 @@ class UserRegisterConfirmSerializer(serializers.Serializer):
     """
 
     def create(self, validated_data):
-        print(validated_data)
+        """temporary unavailable"""
+        # print(validated_data)
 
     def update(self, *args, **kwargs):
-        pass
+        """temporary unavailable"""
 
     token = serializers.CharField(label=_("Token"), required=True)

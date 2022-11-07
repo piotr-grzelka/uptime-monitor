@@ -12,6 +12,6 @@ class PushoverChannel(BaseChannel):
 
     def form_fields(self):
         return [
-            {"kind": "char", "name": "token", "label": "Token", "validators": []},
-            {"kind": "char", "name": "user", "label": "User", "validators": []},
+            {"kind": "char", "name": "token", "title": "Token", "validators": []},
+            {"kind": "char", "name": "user", "title": "User", "validators": []},
         ]
