@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from ..contrib.utils import unique_slug
+
 user_model = get_user_model()
 
 
@@ -29,6 +31,10 @@ class Organization(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs) -> None:
+        unique_slug(self)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = _("Organization")

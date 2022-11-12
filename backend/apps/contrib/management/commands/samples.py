@@ -1,27 +1,31 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
-from apps.accounts.models import CustomUser
-from apps.accounts.tests.factories import UserFactory
-from apps.organizations.tests.factories import OrganizationFactory
-from apps.services.tests.factories import ServiceFactory
+from ....accounts.models import CustomUser
+from ....accounts.tests.factories import UserFactory
+from ....organizations.tests.factories import OrganizationFactory
+from ....services.tests.factories import ServiceFactory
 
 
 class Command(BaseCommand):
-    help = 'Generate sample data'
+    """
+    Generate sample data command
+    """
+
+    help = "Generate sample data"
 
     def add_arguments(self, parser):
-        parser.add_argument('password', type=str)
+        parser.add_argument("password", type=str)
 
     def handle(self, *args, **options):
-        password = options['password']
+        password = options["password"]
 
         CustomUser.objects.all().delete()
 
         super_user = CustomUser.objects.create_superuser(
-            email='test@uptime.loc',
+            email="test@uptime.loc",
             password=password,
-            first_name='Testowy',
-            last_name='Admin'
+            first_name="Testowy",
+            last_name="Admin",
         )
 
         print(f"SuperUser created: {super_user.email} / {password}")
@@ -37,8 +41,7 @@ class Command(BaseCommand):
         services = []
         for i in range(20):
             services += ServiceFactory.create_batch(
-                size=50 - i,
-                organization=organizations[i]
+                size=50 - i, organization=organizations[i]
             )
 
         print(f"{len(services)} services created")
